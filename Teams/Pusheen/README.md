@@ -2,6 +2,7 @@
 =====
 The purpose of this web based application is to encourage users to read complex and lengthy documents.
 
+
 ##Document Format
 To do so, the documentation owner is supposed to provide a easy-to-read, easy-to-write plain text for the document.
 There are three parts(levels) of expected format:
@@ -18,19 +19,30 @@ A title should start with `'#'` notation. More than one title is allowed.
 ```
 
 ###Sub-Title
-A sub-title should start with numbers (starting from 1).
+A sub-title should start with increasing numbers (starting from 1).
 
 **Example**
 ```
 #Title1
-  1. Subtitle1
+  1. Subtitle 1-1
     ...
-  2. Subtitle2
+  2. Subtitle 1-2
     ...
 
 #Title2
-  1. Subtitle1
+  3. Subtitle 2-1
     ...
+```
+
+####Highlight a subtitle
+If all of the paragraphs in a sub-title region are important, add a * notation in front of the heading number.
+
+**Example**
+```
+1. Normal Subtitle
+  ...
+*2. Important Subtitle
+  ...
 ```
 
 ###Content
@@ -45,11 +57,8 @@ Content is divided into several paragraphs. Each paragraph should start with '-'
     - Paragraph2
       ...
 ```
------
 
-In addition to the above, we provide two types of highlight notation.
-
-###Hightlight whole paragraph
+####Hightlight whole paragraph
 If a paragraph is important, start the paragraph with '*' instead.
 
 **Example**
@@ -58,7 +67,7 @@ If a paragraph is important, start the paragraph with '*' instead.
 * This is an importment paragraph.
 ```
 
-###Highlight keywords
+####Highlight keywords
 If a couple of words are important, they can be sandwiched by '**' notation.
 
 **Example**
@@ -69,7 +78,7 @@ If a couple of words are important, they can be sandwiched by '**' notation.
 * This is an importment paragraph with a **keyword**.
 ```
 
-##Escape notation
+###Escape notation
 In the document, if a normal '*' or '\' character is used, escape them by '\' notation.
 
 **Example**
@@ -83,3 +92,4 @@ Use the following instead:
 ```
 "I have \* and \\ in my document."
 ```
+
