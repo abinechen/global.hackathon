@@ -76,10 +76,10 @@ In the document, if a normal '*' or '\' character is used, escape them by '\' no
 
 If you want to present this sentense:
 ```
-"There is a * and \ in my document."
+"I have * and \ in my document."
 ```
 
 Use the following instead:
 ```
-"There is a \* and \\ in my document."
+"I have \* and \\ in my document."
 ```
