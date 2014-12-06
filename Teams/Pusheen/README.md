@@ -49,33 +49,37 @@ Content is divided into several paragraphs. Each paragraph should start with '-'
 
 In addition to the above, we provide two types of highlight notation.
 
-##Hightlight whole paragraph
-  - If a paragraph is important, start the paragraph with '*' instead.
+###Hightlight whole paragraph
+If a paragraph is important, start the paragraph with '*' instead.
 
-  **Example**
-  ```
-  - This is a normal paragraph.
-  * This is an importment paragraph.
-  ```
+**Example**
+```
+- This is a normal paragraph.
+* This is an importment paragraph.
+```
 
-  - If a couple of words are important, they can be sandwiched by '**' notation.
+###Highlight keywords
+If a couple of words are important, they can be sandwiched by '**' notation.
 
-  **Example**
-  ```
-  - This is a normal paragraph with a **keyword**.
-  - This is a normal paragraph with **some important terms**.
-  - This is a normal paragraph with **many keywords** and **several critical concepts**.
-  * This is an importment paragraph with a **keyword**.
-  ```
+**Example**
+```
+- This is a normal paragraph with a **keyword**.
+- This is a normal paragraph with **some important terms**.
+- This is a normal paragraph with **many keywords** and **several critical concepts**.
+* This is an importment paragraph with a **keyword**.
+```
 
 ##Escape notation
 In the document, if a normal '*' or '\' character is used, escape them by '\' notation.
 
 **Example**
-```
+
 If you want to present this sentense:
+```
 "There is a * and \ in my document."
+```
 
 Use the following instead:
+```
 "There is a \* and \\ in my document."
 ```
