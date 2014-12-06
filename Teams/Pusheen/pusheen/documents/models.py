@@ -7,10 +7,12 @@ class Title(models.Model):
 class SubTitle(models.Model):
     subTitleText = models.TextField()
     titleID = models.ForeignKey(Title)
+    isImportant = models.BooleanField(default=False)
 
 class Content(models.Model):
     content = models.TextField()
     subTitleID = models.ForeignKey(SubTitle)
+    isImportant = models.BooleanField(default=False)
 
 class Keyword(models.Model):
     startPos = models.IntegerField()
