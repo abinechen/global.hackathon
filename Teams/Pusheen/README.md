@@ -22,7 +22,7 @@ A sub-title should start with numbers (starting from 1).
 
 **Example**
 ```
-#Title`
+#Title1
   1. Subtitle1
     ...
   2. Subtitle2
@@ -39,10 +39,11 @@ Content is divided into several paragraphs. Each paragraph should start with '-'
 **Example**
 ```
 #Title
-  1. Subtitle1
+  1. Subtitle
     - Paragraph1
+      ...
     - Paragraph2
-    ...
+      ...
 ```
 -----
 
@@ -71,9 +72,10 @@ In addition to the above, we provide two types of highlight notation.
 In the document, if a normal '*' or '\' character is used, escape them by '\' notation.
 
 **Example**
+```
 If you want to present this sentense:
 "There is a * and \ in my document."
 
 Use the following instead:
 "There is a \* and \\ in my document."
-
+```
