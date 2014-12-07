@@ -103,3 +103,6 @@ Use the following instead:
 "I have \* and \\ in my document."
 ```
 
+###Sample Documentation
+For sample input file, please refer to our [example file](https://github.com/abinechen/global.hackathon/tree/master/Teams/Pusheen/input/example).
+
