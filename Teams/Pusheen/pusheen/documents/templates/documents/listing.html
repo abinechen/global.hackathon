@@ -1,0 +1,39 @@
+{% if titles %}
+    <ul>
+    {% for title in titles %}
+        <li><a href="/title/#">{{ title }} {{ title|length }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% if subtitles %}
+    <ul>
+    {% for subtitle in subtitles %}
+        <li><a href="/title/#">{{ subtitle }} {{ subtitle|length }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% if contents %}
+    <ul>
+    {% for content in contents %}
+        <li><a href="/title/#">{{ content.content }} {{ content.content|length }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% if keywords %}
+    <ul>
+    {% for keyword in keywords %}
+        <li><a href="/title/#">{{ keyword }} {{ keyword|length }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
