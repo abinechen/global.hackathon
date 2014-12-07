@@ -1,13 +1,27 @@
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from django.http import Http404
+from documents.models import Article, Title, SubTitle, Content, Keyword
+
+from .forms import UploadFileForm
+from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect
+
+
+from django.core.urlresolvers import reverse
 import os
 import re
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from django.core.urlresolvers import reverse
 
-from documents.models import Article, Title, SubTitle, Content, Keyword
-from documents.forms import UploadFileForm
+
+# Create your views here.
+def index(request):
+    #text1 = ['aaaa', 'bbbb', 'cccc', 'dddd', 'eeee', 'ffff']
+    #text2 = ['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'fff']
+    context = {'a': 'A', 'b':'B'}
+    return render(request, 'documents/index.html', context)
+
 
 # Create your views here.
 def listArticle(request):
@@ -15,14 +29,41 @@ def listArticle(request):
     content = {'articleList': articleList}
     return render(request, 'documents/listArticle.html', content)
 
-def detail(request, articleID):
-    article = get_object_or_404(Article, id=articleID)
-    content = {'articleName': article.name}
-    return render(request, 'documents/listContent.html', content)
+def upload_file(request):
+    
+def handle_uploaded_file(f):
+    try:
+        with open('../input/name.txt', 'wb+') as destination:
+            for chunk in f.chunks():
+                destination.write(chunk)
+    except:
+        raise TypeError("ZZZZZZZ2")
+def listing(request):
+    titles = get_Titles()
+    subtitles = get_SubTitles()
+    contents = get_Content()
+    keywords = get_Keyword()
+    context = {'titles': titles, 'subtitles': subtitles, 'contents': contents, 'keywords': keywords}
+    return render(request, 'documents/listing.html', context)
+
+def get_Titles():
+    titles = Title.objects.all()
+    return titles
+
+def get_SubTitles():
+    subtitles = SubTitle.objects.all()
+    return subtitles
+    
+def get_Content():
+    contents = Content.objects.all()
+    return contents
+
+def get_Keyword():
+    keywords = Keyword.objects.all()
+    return keywords
 
 @csrf_exempt
-def upload(request):
-    '''
+def upload_file(request):
     if request.method == 'POST':
         fileName = request.POST['fileName']
         myPath = os.path.join('input', fileName)
@@ -30,22 +71,11 @@ def upload(request):
         upload.save()
 
         form = UploadFileForm(request.POST, request.FILES)
-        if True:
-            filePath = os.path.join(settings.BASE_DIR, '..', myPath)
-            serverFile = open(filePath, 'wb+')
-            for chunk in request.FILES['file'].chunks():
-                destination.write(chunk)
-            sererFile.close()
-
-            parseInputDocument(1)
-            return HttpResponseRedirect(reverse('documents:listArticle')) 
-
-        else:
-            return HttpResponse("fail")
-
+        handle_uploaded_file(request.FILES['file'])
+        parseInputDocument(upload.id)
+        return HttpResponseRedirect('/documents/listArticle/')
     else:
-        return HttpResponse("not post")
-    '''
+        form = UploadFileForm()
 
 def parseInputDocument(articleID):
     def preProcessing(line):
@@ -111,5 +141,4 @@ def parseInputDocument(articleID):
             saveKeyword(keywords, newContent)
 
     f.close()
-
 
