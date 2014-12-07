@@ -12,3 +12,7 @@ File: <input type="file" name="file"><br>
 <input type="submit" value="Submit" ><br>
 </form>
 
+    <li><a href="{% url 'detail' article.id %}">{{ article.name }}</a></li>
+  {% endfor %}
+</ul>
+
