@@ -24,7 +24,8 @@ class Content(models.Model):
     content = models.TextField()
     subTitleID = models.ForeignKey(SubTitle)
     isImportant = models.BooleanField(default=False)
-    
+    def __unicode__(self):
+        return str(self.id)
 
 class Keyword(models.Model):
     startPos = models.IntegerField()
