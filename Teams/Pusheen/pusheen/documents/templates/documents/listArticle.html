@@ -1,0 +1,7 @@
+<h1>Document List</h1>
+<ul>
+  {% for article in articleList %}
+    <li><a href="{% url 'detail' article.id %}">{{ article.name }}</a></li>
+  {% endfor %}
+</ul>
+
