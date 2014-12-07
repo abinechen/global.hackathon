@@ -35,13 +35,13 @@ A sub-title should start with increasing numbers (starting from 1).
 ```
 
 ####Highlight a subtitle
-If all of the paragraphs in a sub-title region are important, add a * notation in front of the heading number.
+If all of the paragraphs in a sub-title region are important, use '**' notation to sandwish sub-title content.
 
 **Example**
 ```
 1. Normal Subtitle
   ...
-*2. Important Subtitle
+2. **Important Subtitle**
   ...
 ```
 
@@ -77,6 +77,16 @@ If a couple of words are important, they can be sandwiched by '**' notation.
 - This is a normal paragraph with **many keywords** and **several critical concepts**.
 * This is an importment paragraph with a **keyword**.
 ```
+
+###URL
+URLs can be added on any text. Put target text in `[]` brackets, following target link in `()` parentheses.
+
+**Example**
+```
+#Title with [link](http://my.url1)
+  4. Subtitle with [link](http://my.url2)
+    - Content with [link](http://my.url3) and illustartions.
+``` 
 
 ###Escape notation
 In the document, if a normal '*' or '\' character is used, escape them by '\' notation.
