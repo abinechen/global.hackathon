@@ -18,13 +18,9 @@ from django.utils import encoding
 
 # Create your views here.
 def index(request):
-    #text1 = ['aaaa', 'bbbb', 'cccc', 'dddd', 'eeee', 'ffff']
-    #text2 = ['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'fff']
     context = {'a': 'A', 'b':'B'}
     return render(request, 'documents/index.html', context)
 
-
-# Create your views here.
 def listArticle(request):
     articleList = Article.objects.all()
     content = {'articleList': articleList}
@@ -66,7 +62,6 @@ def get_Keyword():
 def upload_file(request):
     if request.method == 'POST':
         fileName = request.POST['fileName']
-        #fileName = 'example'
         myPath = os.path.join('input', fileName)
         upload = Article(name=fileName, path=myPath)
         upload.save()
@@ -111,7 +106,6 @@ def parseInputDocument(articleID):
 
         line = preProcessing(line)
         if not line: continue
-        #if line[0] == '\r': continue
 
         if line[0] == '#':
             text = line.lstrip('#')
