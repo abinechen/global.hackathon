@@ -1,0 +1,655 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Carousel Template &middot; Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <link href="{% static 'assets/bootstrap/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/bootstrap/bootstrap-responsive.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css" media="all">
+    <style>
+
+    /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+
+    body {
+      padding-bottom: 40px;
+      color: #5a5a5a;
+    }
+
+
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      margin-top: 20px;
+      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+    }
+    .navbar-wrapper .navbar {
+
+    }
+
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+      border: 0;
+      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+              box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    }
+
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    }
+
+    /* Navbar links: increase padding for taller navbar */
+    .navbar .nav > li > a {
+      padding: 15px 20px;
+    }
+
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+      margin-top: 10px;
+    }
+
+
+
+    /* CUSTOMIZE THE CAROUSEL
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .carousel {
+      margin-bottom: 0px;
+    }
+
+    .carousel .container {
+      position: relative;
+      z-index: 9;
+    }
+
+    .carousel-control {
+      height: 80px;
+      margin-top: 0;
+      font-size: 120px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      background-color: transparent;
+      border: 0;
+      z-index: 10;
+    }
+
+    .carousel .item {
+      height: 500px;
+    }
+    .carousel img {
+      position: absolute;
+      top: 0px;
+      left: 450px;
+      min-width: 40%;
+      height: 500px;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      position: static;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-top: 200px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 40px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 0px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+    @media (max-width: 979px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+      .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+      }
+
+      .carousel .item {
+        height: 500px;
+      }
+      .carousel img {
+        width: auto;
+        height: 500px;
+      }
+
+      .featurette {
+        height: auto;
+        padding: 0;
+      }
+      .featurette-image.pull-left,
+      .featurette-image.pull-right {
+        display: block;
+        float: none;
+        max-width: 40%;
+        margin: 0 auto 20px;
+      }
+    }
+
+
+    @media (max-width: 767px) {
+
+      .navbar-inner {
+        margin: -20px;
+      }
+
+      .carousel {
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+      .carousel .container {
+
+      }
+      .carousel .item {
+        height: 300px;
+      }
+      .carousel img {
+        height: 300px;
+      }
+      .carousel-caption {
+        width: 65%;
+        padding: 0 70px;
+        margin-top: 100px;
+      }
+      .carousel-caption h1 {
+        font-size: 30px;
+      }
+      .carousel-caption .lead,
+      .carousel-caption .btn {
+        font-size: 18px;
+      }
+
+      .marketing .span4 + .span4 {
+        margin-top: 40px;
+      }
+
+      .featurette-heading {
+        font-size: 30px;
+      }
+      .featurette .lead {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+    }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/Scripts/bootstrap/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'Images/bootstrap/ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'Images/bootstrap/ico/apple-touch-icon-114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'Images/bootstrap/ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'Images/bootstrap/ico/apple-touch-icon-57-precomposed.png' %}">
+    <link rel="shortcut icon" href="{% static 'Images/bootstrap/ico/favicon.png' %}">
+</head>
+
+<body>
+	<form name=count>
+		<input type="hidden" name="num" value="1">
+	</form>
+	<form name=win>
+		<input type="hidden" name="num" value="14">
+	</form>
+	<form name=randam>
+		<input type="hidden" name="num" value="1">
+	</form>
+    <!-- NAVBAR
+    ================================================== -->
+    
+
+<!-- START THE FEATURETTES -->
+	<div class="container marketing">
+        <div id="playgame" class="featurette">
+            <h2 class="featurette-heading">I Want To Play A Game. <span class="muted">Yeah.</span></h2>
+            <p class="lead">Since you say you agree our agreement, we suppose you really have dead it. So we want to give a little test before you download our application.</p>
+        </div>
+		<div id="playgame" class="featurette">
+            <p class="lead"><span class="muted">This part will explain how to play this game, but I'm too tired to think what can be written here. Fucking jet-lagged.  </span></p>
+        </div>
+	</div>
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="item active">
+                
+				<img id="someImage" name=num src="" >
+				
+			</div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+    <!-- /.carousel -->
+
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+        <!-- START THE FEATURETTES -->
+        
+
+        
+		<div id="wingame" class="featurette"   style="display:none">
+            <h2 class="featurette-heading">You win. <span class="muted">You can download your application now.</span></h2>
+            <p class="lead">Hey, you really read our agreement clearly right?</p>
+        </div>
+
+        
+		<div id="losegame" class="featurette"   style="display:none">
+            <h2 class="featurette-heading">You lose. <span class="muted">You will pay for that!</span></h2>
+            <p class="lead">Like what I said. Now you should give us your credit card number and pay for you application</p>
+        </div>
+
+        <hr class="featurette-divider">
+		
+<!-- choice game here -->		
+		<div id="choicegame" class="featurette"  style="display:block">
+			<section class="puzzleSec">
+            <h1 class = "GameName">RULE CHOISE</h1>
+            <h4 class = "GameIntro">Choose the correct word for the rules! A_A</h4>
+            <script>
+                //rule_c = "Mika started up his company";
+                
+                var rule_c_all = new Array();
+                {% for rc in rand_contents %}
+	        	    rule_c_all[eval({{ forloop.counter }}-1)] = '{{ rc.content }}';
+		        {% endfor %}
+		        var word_c_all = new Array();
+		        {% for w in rand_words %}
+	        	    word_c_all[eval({{ forloop.counter }}-1)] = '{{ w }}';
+		        {% endfor %}
+		        var cnt_c = 0;
+		        var rule_c = rule_c_all[cnt_c];
+                var words = rule_c.split(" ");
+                var max = 0, max_i;
+                for(var i = 0; i < words.length; i++){
+                    if(words[i].length > max){
+                        max = words[i].length;
+                        max_i = i;
+                    }
+                }
+                
+                optionAns = [word_c_all[cnt_c*4], word_c_all[cnt_c*4+1], word_c_all[cnt_c*4+2], word_c_all[cnt_c*4+3]];
+                cnt_c++;
+                maxNum = optionAns.length - 1;
+                minNum = 0;
+                var n_c = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum; 
+                optionAns[n_c] = words[max_i];
+                
+				function checkAns_c(){
+                    var ans_c = -1;
+                    for(var i = 0; i < optionAns.length; i++){
+                        if(document.getElementById(i).checked == true){
+                            ans_c = i;
+                        }
+                    }
+                    
+                    if(ans_c == -1){
+                        alert("You haven't finished");
+                    }else{
+						if(ans_c != n_c){
+							
+							document.count.num.value++;
+							document.getElementById("someImage").src=getImagePath(document.count.num.value);
+							ans_c = 0;
+							alert("Wrong Answer!!");
+							if(document.count.num.value==8){
+								$("#playgame").css('display', 'none');
+								$("#choicegame").css('display', 'none');
+								$("#puzzlegame").css('display', 'none');
+								$("#losegame").css('display', 'block');
+							}
+						}else{
+							ans_c = 1;
+							alert("pass");
+							document.win.num.value--;
+							if(document.win.num.value==0){
+								$("#playgame").css('display', 'none');
+								$("#choicegame").css('display', 'none');
+								$("#puzzlegame").css('display', 'none');
+								$("#wingame").css('display', 'block');
+							}
+						}
+						maxNum2 = 1;
+						minNum2 = 0;
+					
+						document.randam.num.value = Math.floor(Math.random() * (maxNum2 - minNum2 + 1)) + minNum2;
+						if(document.randam.num.value==1&&(document.win.num.value!=0&&document.count.num.value!=8)){
+							$("#choicegame").css('display', 'none');
+							$("#puzzlegame").css('display', 'none');
+							$("#choicegame").css('display', 'block');
+							updateQues_c();
+						}else if(document.randam.num.value==0&&(document.win.num.value!=0&&document.count.num.value!=8)){
+							$("#puzzlegame").css('display', 'none');
+							$("#choicegame").css('display', 'none');
+							$("#puzzlegame").css('display', 'block');
+							updateQues_p();
+						}
+
+					}
+                    
+                }
+            </script>
+            <h3 class = "smallTitle">Rule</h3>
+            <div id = "rule_single" class = "rule_type">
+                <script>
+                    for(var i = 0; i < words.length; i++){
+                        if(i != max_i){
+                            document.write(words[i]+" ");
+                        }else{
+                            blank = "________ ";
+                            document.write(blank);
+                        }
+                        document.writeln("");
+                    }
+                </script>
+            </div>
+            <form>
+                <script>
+                    for(var i = 0; i < optionAns.length; i++){
+                        var sentense = "<input id = "+ i +" class = \"option_type\" type=\"radio\" name = \"word\">"+ "<ttt id=\"o" +i+ "\">" + optionAns[i] + "</ttt>";
+                        document.write(sentense);
+                    }
+                    document.writeln("");
+					function updateQues_c(){
+                        //asking for data
+                        rule_c = "Mika started up his companys55";
+                        rule_c = rule_c_all[cnt_c];
+                        var words = rule_c.split(" ");
+                        var max = 0, max_i;
+                        for(var i = 0; i < words.length; i++){
+                            if(words[i].length > max){
+                                max = words[i].length;
+                                max_i = i;
+                            }
+                        }
+                        
+                        var optionAns = optionAns = [word_c_all[cnt_c*4], word_c_all[cnt_c*4+1], word_c_all[cnt_c*4+2], word_c_all[cnt_c*4+3]];
+                        cnt_c++;
+                        maxNum = optionAns.length - 1;
+                        minNum = 0;
+                        n_c = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum; 
+                        optionAns[n_c] = words[max_i];
+                        var sentense = "";
+                        for(var i = 0; i < words.length; i++){
+                            if(i != max_i){
+                                sentense = sentense + words[i] + " ";
+                            }else{
+                                sentense = sentense + "________ "
+                            }
+                        }
+                        document.getElementById("rule_single").value = sentense;
+                        for(var i = 0; i < optionAns.length; i++){
+                            document.getElementById("o"+i).innerText = optionAns[i];
+                            document.getElementById(i).checked = false;
+                        }
+                    }
+                </script>
+
+            </form>
+            <button class="checkAnsBut" onclick = checkAns_c()>Check Ans!! Dah!!</button>
+        </section>
+	    </div>
+<!-- puzzle game here -->
+		
+		<div id="puzzlegame" class="featurette"  style="display:none">
+		<section class="puzzleSec">
+            <h1 class = "GameName">RULE PUZZLE</h1>
+            <h4 class = "GameIntro">Drag the rules into correct category! A_A</h4>
+            <script>
+                var num_title = 3, num_rule = 5;
+                {% for rs in req_subtitles %}
+	        	    title_p_all[eval({{ forloop.counter }}-1)] = '{{ rs.content }}';
+		        {% endfor %}
+		        {% for rc in req_contents %}
+	        	    rule_p_all[eval({{ forloop.counter }}-1)] = '{{ rc.content }}';
+		        {% endfor %}
+		        
+		        var cnt_p = 0;
+                var title = ["titleA", "titleE", "titleC"];
+                var rule = [[0, "Mika started up his company", -1], 
+                            [2, "The album was released", -1],
+                            [1, "The Boy Who Knew Too Much", -1],
+                            [2, "The Origin of Love", -1],
+                            [1, "Mika announced a new tour", -1]];
+                function allowDrop(ev) {
+                    ev.preventDefault();
+                }
+                function drag(ev) {
+                    ev.dataTransfer.setData("text", ev.target.id);
+                }
+                function drop(ev) {
+                    ev.preventDefault();
+                    var data = ev.dataTransfer.getData("text");
+                    var realTarget = ev.target;
+                    if(document.getElementById(ev.target.id).draggable == true){
+                        var realTarget = document.getElementById(ev.target.id).parentNode;
+                    }
+                    realTarget.appendChild(document.getElementById(data));
+                    var splitID = data.split("rule");
+                    var ruleID = parseInt(splitID[1]);
+                    var origin_pos = rule[ruleID][2];
+                    splitID = realTarget.id.split("title");
+                    rule[ruleID][2] = parseInt(splitID[1]);
+                }
+                function checkAns(){
+                    var ans = 0;
+                    for(var i = 0; i < num_rule; i++){
+                        if(rule[i][2] == -1){
+                            ans = -1;
+                            break;
+                        }else if(rule[i][0] == rule[i][2]){
+                            ans++;
+                        }
+                    }
+                    if(ans == -1){
+                        alert("You haven't finish the test!!!!!!!!!!!");
+                    }else {
+						if(ans < 3){
+							alert("WTF!");
+							document.count.num.value++;
+							document.getElementById("someImage").src=getImagePath(document.count.num.value);
+							if(document.count.num.value==8){
+								$("#playgame").css('display', 'none');
+								$("#choicegame").css('display', 'none');
+								$("#puzzlegame").css('display', 'none');
+								$("#losegame").css('display', 'block');
+							}
+						}else{
+							alert("Pass!");
+							document.win.num.value--;
+							if(document.win.num.value==0){
+								$("#playgame").css('display', 'none');
+								$("#choicegame").css('display', 'none');
+								$("#puzzlegame").css('display', 'none');
+								$("#wingame").css('display', 'block');
+							}
+						}
+						
+						maxNum2 = 1;
+						minNum2 = 0;
+					
+						document.randam.num.value = Math.floor(Math.random() * (maxNum2 - minNum2 + 1)) + minNum2;
+						if(document.randam.num.value==1&&(document.win.num.value!=0&&document.count.num.value!=8)){
+							$("#choicegame").css('display', 'none');
+							$("#puzzlegame").css('display', 'none');
+							$("#choicegame").css('display', 'block');
+							updateQues_c();
+						}else if(document.randam.num.value==0&&(document.win.num.value!=0&&document.count.num.value!=8)){
+							$("#puzzlegame").css('display', 'none');
+							$("#choicegame").css('display', 'none');
+							$("#puzzlegame").css('display', 'block');
+							updateQues_p();
+						}
+					}
+                }
+            </script>
+            <h3 class = "smallTitle">Rules</h3>
+            <div id = "dragPlace">
+                <script>
+                    for(var i = 0; i < num_rule; i++){
+                        var sentence = "<div id = \"rule" + i + "\" class = \"rule_type\" draggable = \"true\" droppable=\"false\" ondragstart = \"drag(event)\">"+ rule[i][1] +"</div>";
+                        document.writeln(sentence);
+                    }
+                </script>
+            </div>
+            <h3 class = "smallTitle">Title</h3>
+            <script>
+                for(var i = 0; i < num_title; i++){
+                    var sentence = "<div id = \"title" + i + "\" class = \"title_type\" droppable=\"true\" ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\">"+ title[i] +"</div>";
+                    document.writeln(sentence);
+                }
+				function updateQues_p(){
+                    var num_title = 3, num_rule = 5;
+                    var title = ["title2A", "title2E", "title2C"];
+                    var rule = [[0, "Mika2 started up his company", -1], 
+                                [2, "The2 album was released", -1],
+                                [1, "The2 Boy Who Knew Too Much", -1],
+                                [2, "The2 Origin of Love", -1],
+                                [1, "Mik2a announced a new tour", -1]];
+                    for(var i = 0; i < num_rule; i++){
+                        document.getElementById("rule" + i).innerText = rule[i][1];
+                        document.getElementById("dragPlace").appendChild(document.getElementById("rule" + i));
+                    }
+                }
+            </script>
+            <button class="checkAnsBut" onclick = checkAns()>Check Ans!! Dah!!</button>
+        </section>
+		</div>
+		
+        <!-- /END THE FEATURETTES -->
+
+
+        <!-- FOOTER -->
+        <footer>
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  
+
+    <script>
+	
+
+	function getImagePath(inputN){
+		if(inputN == 1){return "{% static 'Images/bootstrap/hangman/1st.jpg' %}";}
+		else if(inputN == 2){return "{% static 'Images/bootstrap/hangman/2nd.jpg' %}";}
+		else if(inputN == 3){return "{% static 'Images/bootstrap/hangman/3rd.jpg' %}";}
+		else if(inputN == 4){return "{% static 'Images/bootstrap/hangman/4th.jpg' %}";}
+		else if(inputN == 5){return "{% static 'Images/bootstrap/hangman/5th.jpg' %}";}
+		else if(inputN == 6){return "{% static 'Images/bootstrap/hangman/6th.jpg' %}";}
+		else if(inputN == 7){return "{% static 'Images/bootstrap/hangman/7th.jpg' %}";}
+		else if(inputN == 8){return "{% static 'Images/bootstrap/hangman/8th.jpg' %}";}
+	}
+	document.getElementById("someImage").src=getImagePath(1);
+	
+        !function ($) {
+            $(function () {
+                // carousel demo
+                $('#myCarousel').carousel()
+            })
+        }(window.jQuery)
+    </script>
+    <script src="{% static '/assert/holder.js' %}"></script>
+</body>
+</html>
+
