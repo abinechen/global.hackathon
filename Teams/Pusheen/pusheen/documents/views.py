@@ -14,30 +14,26 @@ import re
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 
+from django.utils import encoding
 
 # Create your views here.
 def index(request):
-    #text1 = ['aaaa', 'bbbb', 'cccc', 'dddd', 'eeee', 'ffff']
-    #text2 = ['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'fff']
     context = {'a': 'A', 'b':'B'}
     return render(request, 'documents/index.html', context)
 
-
-# Create your views here.
 def listArticle(request):
     articleList = Article.objects.all()
     content = {'articleList': articleList}
     return render(request, 'documents/listArticle.html', content)
 
-def upload_file(request):
-    
-def handle_uploaded_file(f):
+def handle_uploaded_file(f, path):
     try:
-        with open('../input/name.txt', 'wb+') as destination:
+        with open(path, 'wb+') as destination:
             for chunk in f.chunks():
                 destination.write(chunk)
     except:
         raise TypeError("ZZZZZZZ2")
+
 def listing(request):
     titles = get_Titles()
     subtitles = get_SubTitles()
@@ -70,8 +66,9 @@ def upload_file(request):
         upload = Article(name=fileName, path=myPath)
         upload.save()
 
+        filePath = os.path.join(settings.BASE_DIR, '..', myPath)
         form = UploadFileForm(request.POST, request.FILES)
-        handle_uploaded_file(request.FILES['file'])
+        handle_uploaded_file(request.FILES['file'], filePath)
         parseInputDocument(upload.id)
         return HttpResponseRedirect('/documents/listArticle/')
     else:
@@ -81,7 +78,7 @@ def parseInputDocument(articleID):
     def preProcessing(line):
         line = re.sub('\\\\\\\\', '__MY_BACKSLASH__', line)
         line = re.sub('\\\\\*', '__MY_START__', line)
-        line = line.lstrip(' ').rstrip('\n')
+        line = line.lstrip(' ').rstrip('\n').rstrip('\r')
         return line
 
     def restore(string):
@@ -103,7 +100,6 @@ def parseInputDocument(articleID):
     newTitle = Title()
     newSubTitle = SubTitle()
     newContent = Content()
-
     while True:
         line = f.readline()
         if not line: break
@@ -124,7 +120,7 @@ def parseInputDocument(articleID):
                     text = text[2:len(text)-2]
                     isImp = True
 
-                newSubTitle = SubTitle(subTitleText=text, titleID=newTitle, isImportant=isImp)
+                newSubTitle = SubTitle(subTitleText=convert_unicode_to_string(text), titleID=newTitle, isImportant=isImp)
                 newSubTitle.save()
 
         else:
@@ -135,10 +131,16 @@ def parseInputDocument(articleID):
             isImp = line[0] == '*'
 
             text = text[2:len(text)]
-            newContent = Content(content=text, subTitleID=newSubTitle, isImportant=isImp)
+            newContent = Content(content=convert_unicode_to_string(text), subTitleID=newSubTitle, isImportant=isImp)
             newContent.save()
 
             saveKeyword(keywords, newContent)
 
     f.close()
 
+def convert_unicode_to_string(x):
+    """
+    >>> convert_unicode_to_string(u'ni\xf1era')
+    'niera'
+    """
+    return encoding.smart_str(x, encoding='ascii', errors='ignore')

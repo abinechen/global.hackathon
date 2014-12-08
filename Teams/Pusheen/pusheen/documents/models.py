@@ -30,7 +30,7 @@ class Content(models.Model):
 class Keyword(models.Model):
     startPos = models.IntegerField()
     length = models.IntegerField(default=1)
-    content = models.ForeignKey(Content)
+    contentID = models.ForeignKey(Content)
     def __unicode__(self):
-        return str(self.startPos)+" "+str(self.length)+" "+str(self.content.id)
+        return str(self.startPos)+" "+str(self.length)+" "+str(self.contentID)
 
