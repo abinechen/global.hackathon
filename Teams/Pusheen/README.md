@@ -78,16 +78,6 @@ If a couple of words are important, they can be sandwiched by '**' notation.
 * This is an importment paragraph with a **keyword**.
 ```
 
-###URL
-URLs can be added on any text. Put target text in `[]` brackets, following target link in `()` parentheses.
-
-**Example**
-```
-#Title with [link](http://my.url1)
-  4. Subtitle with [link](http://my.url2)
-    - Content with [link](http://my.url3) and illustartions.
-``` 
-
 ###Escape notation
 In the document, if a normal '*' or '\' character is used, escape them by '\' notation.
 
