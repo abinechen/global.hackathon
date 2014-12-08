@@ -16,10 +16,35 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.utils import encoding
 
+import random
+
 # Create your views here.
 def index(request):
     context = {'a': 'A', 'b':'B'}
     return render(request, 'documents/index.html', context)
+    
+def demo(request):
+    subtitles = get_SubTitles()
+    contents = get_Content()
+    context = {'subtitles': subtitles, 'contents': contents}
+    return render(request, 'documents/demo.html', context)
+    
+def game(request):
+    all_contents = get_Content()
+    all_titles = get_Titles()
+    all_subtitles = get_SubTitles()
+    str1 = ' '.join(all_contents)
+    str2 = ' '.join(all_titles)
+    str3 = ' '.join(all_subtitles)
+    str = str1 + str2 + str3
+    candidate = []
+    for s in str:
+        if len(s) > 6
+            candidate.append(s)
+    rand_contents = random.sample(all_contents, 7)
+    rand_words = random.sample(candidate, 28)
+    context = {'rand_contents': rand_contents, 'rand_words': rand_words}
+    return render(request, 'documents/game.html', context)
 
 def listArticle(request):
     articleList = Article.objects.all()
@@ -33,6 +58,23 @@ def handle_uploaded_file(f, path):
                 destination.write(chunk)
     except:
         raise TypeError("ZZZZZZZ2")
+
+def puzzle(request):
+    all_contents = get_Content()
+    rand_contents = random.sample(all_contents, 5)
+    req_subtitles = []
+    req_contents = []
+    for rc in rand_contents:
+        if rc not in req_subtitles:
+            req_subtitles.append(rc.subTitleID)
+    for rc in rand_contents:
+        req_contents.append({'sTID': req_subtitles.index(rc.subTitleID), 'rcContent': rc.content})
+    datas = [ req_subtitles, req_contents ]
+    #context = {'datas': datas}
+    context = {'req_subtitles': req_subtitles, 'req_contents': req_contents}
+    return render(request, 'documents/puzzle.html', context)
+    
+    
 
 def listing(request):
     titles = get_Titles()
