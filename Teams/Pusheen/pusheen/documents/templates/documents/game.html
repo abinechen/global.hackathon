@@ -490,14 +490,15 @@
             <script>
                 var num_title = 3, num_rule = 5;
                 {% for rs in req_subtitles %}
-	        	    title_p_all[eval({{ forloop.counter }}-1)] = '{{ rs.content }}';
+	        	    title_p_all[eval({{ forloop.counter }}-1)] = '{{ rss }}';
 		        {% endfor %}
 		        {% for rc in req_contents %}
-	        	    rule_p_all[eval({{ forloop.counter }}-1)] = '{{ rc.content }}';
+	        	    rule_p_all[eval({{ forloop.counter }}-1)] = '{{ rc }}';
 		        {% endfor %}
 		        
 		        var cnt_p = 0;
-                var title = ["titleA", "titleE", "titleC"];
+		        
+                //var title = ["titleA", "titleE", "titleC"];
                 var rule = [[0, "Mika started up his company", -1], 
                             [2, "The album was released", -1],
                             [1, "The Boy Who Knew Too Much", -1],

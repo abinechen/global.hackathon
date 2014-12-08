@@ -55,10 +55,15 @@ def game(request):
     rand_contents = random.sample(all_contents, 7)
     rand_words = random.sample(candidate, 28)
     
-    puzzle_data = get_puzzle_data()
-    #req_subtitles = puzzle_data['req_subtitles']
-    #req_contents = puzzle_data['req_contents']
-    context = {'rand_contents': rand_contents, 'rand_words': rand_words, 'req_subtitles': puzzle_data['req_subtitles'], 'req_contents':puzzle_data['req_contents']}
+    req_subtitles = []
+    req_contents = []
+    for i in range(0, 7):
+        puzzle_data = get_puzzle_data()
+        for j in puzzle_data['req_subtitles']:
+            req_subtitles.append(j)
+        for j in puzzle_data['req_contents']
+            req_contents.append(j)
+    context = {'rand_contents': rand_contents, 'rand_words': rand_words, 'req_subtitles': req_subtitles, 'req_contents': req_contents}
     return render(request, 'documents/game.html', context)
 
 def listArticle(request):
