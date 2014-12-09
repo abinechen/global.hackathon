@@ -16,10 +16,55 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.utils import encoding
 
+import random
+
 # Create your views here.
 def index(request):
     context = {'a': 'A', 'b':'B'}
     return render(request, 'documents/index.html', context)
+    
+def puzzle(request):
+    context = {'a': 'A', 'b':'B'}
+    return render(request, 'documents/puzzle.html', context)
+    
+def demo(request):
+    subtitles = get_SubTitles()
+    contents = get_Content()
+    context = {'subtitles': subtitles, 'contents': contents}
+    return render(request, 'documents/demo.html', context)
+    
+def game(request):
+    all_contents = get_Content()
+    all_titles = get_Titles()
+    all_subtitles = get_SubTitles()
+    str1=""
+    str2=""
+    str3=""
+    for c in all_contents:
+        str1=str1 + " " + c.content
+    for t in all_titles:
+        str2=str2 + " " + t.titleText
+    for st in all_subtitles:
+        str3=str3 + " " + st.subTitleText
+    str = str1 + " " + str2 + " " + str3
+    candidate = []
+    strlist = str.split()
+    for s in strlist:
+        if len(s) > 6:
+            candidate.append(s)
+    rand_contents = random.sample(all_contents, 7)
+    rand_words = random.sample(candidate, 28)
+    
+    req_subtitles = []
+    req_contents = []
+    for i in range(0, 7):
+        puzzle_data = get_puzzle_data()
+        for j in puzzle_data['req_subtitles']:
+            req_subtitles.append(j)
+        for j in puzzle_data['req_contents']
+            req_contents.append(j)
+    context = {'rand_contents': rand_contents, 'rand_words': rand_words, 'req_subtitles': req_subtitles, 'req_contents': req_contents}
+    return render(request, 'documents/game.html', context)
 
 def listArticle(request):
     articleList = Article.objects.all()
@@ -33,6 +78,23 @@ def handle_uploaded_file(f, path):
                 destination.write(chunk)
     except:
         raise TypeError("ZZZZZZZ2")
+
+def get_puzzle_data():
+    all_contents = get_Content()
+    rand_contents = random.sample(all_contents, 5)
+    req_subtitles = []
+    req_contents = []
+    for rc in rand_contents:
+        if rc not in req_subtitles:
+            req_subtitles.append(rc.subTitleID)
+    for rc in rand_contents:
+        req_contents.append({'sTID': req_subtitles.index(rc.subTitleID), 'rcContent': rc.content})
+    datas = [ req_subtitles, req_contents ]
+    
+    context = {'req_subtitles': req_subtitles, 'req_contents': req_contents}
+    return context
+    
+    
 
 def listing(request):
     titles = get_Titles()

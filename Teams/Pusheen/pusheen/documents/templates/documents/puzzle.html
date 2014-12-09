@@ -1,0 +1,23 @@
+{% if req_subtitles %}
+    
+    <ul>
+    {% for data in req_subtitles %}
+        <li><a href="/#">{{ data }} {{ data.subTitleID }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+    
+{% if req_contents %}
+    <ul>
+    {% for x in req_contents %}
+        
+        <li><a href="/#">
+        {{ x.sTID }} {{ x.rcContent }}
+        </a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
