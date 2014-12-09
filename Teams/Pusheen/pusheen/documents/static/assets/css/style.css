@@ -1,0 +1,56 @@
+.puzzleSec{
+    background-color: #95AFBA;
+    width: 600px;
+    min-height: 80px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    word-break: normal;
+    font-family: cursive;
+}
+.GameName{
+    width: 450px;
+    margin-left: 150px;
+}
+.GameIntro{
+    margin-left: 120px;
+    color: #5F464B;
+}
+.smallTitle{
+    margin-left: 15px;
+}
+.rule_type{
+    background-color: #DFF2D8;
+    width: 540px;
+    margin-left: 15px;
+    margin-top: 5px;
+    word-break: normal;
+    text-align: justify;
+    line-height: 18px;
+    font-size: 16px;
+}
+.title_type{
+    background-color: #C6DEA6;
+    width: 560px;
+    margin: 10px 15px;
+    min-height: 30px;
+    padding: 5px 5px;
+    padding-bottom: 10px;
+    word-break: normal;
+    text-align: justify;
+    line-height: 22px;
+    font-size: 20px;
+}
+.checkAnsBut{
+    width: 140px;
+    margin-left: 220px;
+    margin-top: 30px;
+}
+.option_type{
+    margin: 10px 15px;
+}
+*[draggable=true] {
+    -khtml-user-drag: element;
+    cursor: move;
+}
+ttt{
+}
